@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const cardArray = [
+  const typesArray = [
     {
       name: 'new',
       img: 'images/new.png'
@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   ]
 
+  const board = [][]
+
   const grid = document.querySelector('.grid')
   const minesDisplay = document.querySelector('#mines')
   const timerDisplay = document.querySelector('#timer')
@@ -27,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         field.setAttribute('y',j)
         field.addEventListener('click', clickField)
         grid.appendChild(field)
+        board[i][j]=field
       }
     }
   }
