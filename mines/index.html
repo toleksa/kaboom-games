@@ -5,15 +5,20 @@
   <title>Kaboom - Mines</title>
   <link rel="stylesheet" href="style.css"></link>
   <style>
-  body {
-    margin: 0;
-    overflow: hidden;
-  }
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      width: 400px;
+      height: 300px;
+    }
   </style>
+  <script src="mines.js" charset="utf-8"></script>
 </head>
 <body>
-  <script src="https://kaboomjs.com/lib/0.5.0/kaboom.js"></script>
-  <script src="mines.js" charset="utf-8"></script>
 
   <h3>
     Time:<span id="timer"></span><br>
