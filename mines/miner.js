@@ -20,4 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ]
 
   const grid = document.querySelector('.grid')
-  const resultDisplay = document.querySelector('#result')
+  const minesDisplay = document.querySelector('#mines')
+  const timerDisplay = document.querySelector('#timer')
+
+
