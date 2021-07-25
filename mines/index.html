@@ -4,11 +4,21 @@
   <meta charset="UTF-8">
   <title>Kaboom - Mines</title>
   <link rel="stylesheet" href="style.css"></link>
-  <script src="mines.js" charset="utf-8"></script>
+  <style>
+  body {
+    margin: 0;
+    overflow: hidden;
+  }
+  </style>
 </head>
 <body>
+  <script src="https://kaboomjs.com/lib/0.5.0/kaboom.js"></script>
+  <script src="mines.js" charset="utf-8"></script>
 
-  <h3>Mines:<span id="result"></span>Time:<span id="time"></span></h3>
+  <h3>
+    Time:<span id="time"></span><br>
+    Mines:<span id="result"></span>
+  </h3>
 
   <div class="grid">
   </div>
