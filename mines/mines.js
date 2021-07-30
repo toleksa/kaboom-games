@@ -1,6 +1,3 @@
-//TODO:
-//- restart game button
-//- harder difficulty
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.grid')
   const control = document.querySelector('.control')
