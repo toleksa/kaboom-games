@@ -3,7 +3,9 @@
 //- harder difficulty
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.grid')
+  const control = document.querySelector('.control')
   const minesDisplay = document.querySelector('#mines')
+  var mode = 'easy'
   var sizeX = 10
   var sizeY = 10
   var mines = 10
@@ -15,6 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function createBoard(x,y,mines){
+    const easy = document.createElement('img')
+    easy.setAttribute('src','img/new.png')
+    easy.addEventListener('click', setEasy)
+    control.appendChild(easy)
+
+    const hard = document.createElement('img')
+    hard.setAttribute('src','img/new.png')
+    hard.addEventListener('click', setHard)
+    control.appendChild(hard)
+    
     for (let i=0; i<x; i++){
       for (let j=0; j<y; j++){
         const field = document.createElement('img')
@@ -27,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.appendChild(field)
       }
     }
+
     //deploy mines
     var counter = 0
     while(true){
@@ -175,6 +188,38 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       return
     }
+  }
+
+  function setEasy(){
+    mode = 'easy'
+    gameReset()
+  }
+
+  function setHard(){
+    mode = 'hard'
+    gameReset()
+  }
+
+  function gameReset(){
+    while (grid.lastElementChild) {
+      grid.removeChild(grid.lastElementChild);
+    }
+    while (control.lastElementChild) {
+      control.removeChild(control.lastElementChild);
+    }
+    if(mode=='easy'){
+      sizeX=10
+      sizeY=10
+      mines=10
+    }
+    if(mode=='hard'){
+      sizeX=10
+      sizeY=10
+      mines=20
+    }
+    minesLeft=mines
+    gameState='play'
+    createBoard(sizeX,sizeY,mines)
   }
 
   createBoard(sizeX,sizeY,mines)
