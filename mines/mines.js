@@ -20,6 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     easy.addEventListener('click', setEasy)
     control.appendChild(easy)
 
+    const medium = document.createElement('img')
+    medium.setAttribute('src','img/medium.png')
+    medium.addEventListener('click', setMedium)
+    control.appendChild(medium)
+
     const hard = document.createElement('img')
     hard.setAttribute('src','img/hard.png')
     hard.addEventListener('click', setHard)
@@ -194,6 +199,11 @@ document.addEventListener('DOMContentLoaded', () => {
     gameReset()
   }
 
+  function setMedium(){
+    mode = 'medium'
+    gameReset()
+  }
+
   function setHard(){
     mode = 'hard'
     gameReset()
@@ -213,13 +223,21 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.style.width = '400px'
       grid.style.height = '400px'
     }
+    if(mode=='medium'){
+      sizeX=15
+      sizeY=15
+      mines=25
+      grid.style.width = '600px'
+      grid.style.height = '600px'
+    }
     if(mode=='hard'){
       sizeX=20
       sizeY=20
-      mines=40
+      mines=60
       grid.style.width = '800px'
       grid.style.height = '800px'
     }
+
     minesLeft=mines
     gameState='play'
     createBoard(sizeX,sizeY,mines)
