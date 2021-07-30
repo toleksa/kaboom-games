@@ -18,12 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function createBoard(x,y,mines){
     const easy = document.createElement('img')
-    easy.setAttribute('src','img/new.png')
+    easy.setAttribute('src','img/easy.png')
     easy.addEventListener('click', setEasy)
     control.appendChild(easy)
 
     const hard = document.createElement('img')
-    hard.setAttribute('src','img/new.png')
+    hard.setAttribute('src','img/hard.png')
     hard.addEventListener('click', setHard)
     control.appendChild(hard)
     
@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currField.setAttribute('counter',counter)
       }
     }
+    minesDisplay.textContent = minesLeft
   } // END createBoard(x,y,mines)
 
   function checkNeighboors(coord){
