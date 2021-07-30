@@ -17,17 +17,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const easy = document.createElement('img')
     easy.setAttribute('src','img/easy.png')
-    easy.addEventListener('click', setEasy)
+    easy.setAttribute('difficulty','easy')
+    easy.addEventListener('click', gameReset)
     control.appendChild(easy)
 
     const medium = document.createElement('img')
     medium.setAttribute('src','img/medium.png')
-    medium.addEventListener('click', setMedium)
+    medium.setAttribute('difficulty','medium')
+    medium.addEventListener('click', gameReset)
     control.appendChild(medium)
 
     const hard = document.createElement('img')
     hard.setAttribute('src','img/hard.png')
-    hard.addEventListener('click', setHard)
+    hard.setAttribute('difficulty','hard')
+    hard.addEventListener('click', gameReset)
     control.appendChild(hard)
     
     for (let i=0; i<x; i++){
@@ -194,21 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function setEasy(){
-    mode = 'easy'
-    gameReset()
-  }
-
-  function setMedium(){
-    mode = 'medium'
-    gameReset()
-  }
-
-  function setHard(){
-    mode = 'hard'
-    gameReset()
-  }
-
   function gameReset(){
     while (grid.lastElementChild) {
       grid.removeChild(grid.lastElementChild);
@@ -216,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     while (control.lastElementChild) {
       control.removeChild(control.lastElementChild);
     }
+    mode=this.getAttribute('difficulty')
     if(mode=='easy'){
       sizeX=10
       sizeY=10
