@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(mode=='hard'){
       sizeX=10
       sizeY=10
-      mines=20
+      mines=15
     }
     minesLeft=mines
     gameState='play'
