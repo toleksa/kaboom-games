@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function createBoard(x,y,mines){
+
     const easy = document.createElement('img')
     easy.setAttribute('src','img/easy.png')
     easy.addEventListener('click', setEasy)
@@ -209,11 +210,15 @@ document.addEventListener('DOMContentLoaded', () => {
       sizeX=10
       sizeY=10
       mines=10
+      grid.style.width = '400px'
+      grid.style.height = '400px'
     }
     if(mode=='hard'){
-      sizeX=10
-      sizeY=10
-      mines=15
+      sizeX=20
+      sizeY=20
+      mines=40
+      grid.style.width = '800px'
+      grid.style.height = '800px'
     }
     minesLeft=mines
     gameState='play'
