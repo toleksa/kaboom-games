@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kaboom-games-deployment
+  labels:
+    app: kaboom-games
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kaboom-games
+  template:
+    metadata:
+      labels:
+        app: kaboom-games
+    spec:
+      containers:
+      - name: kaboom-games
+        image: toleksa/kaboom-games
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kaboom-games
+spec:
+  selector:
+    app: kaboom-games
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30001
+
