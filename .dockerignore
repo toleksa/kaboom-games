@@ -1,3 +1,5 @@
 Dockerfile
 run.sh
+build.sh
 README.md
+kaboom-games-deployment.yaml
