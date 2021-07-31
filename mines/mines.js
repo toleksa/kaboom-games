@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gameState='play'
     stopTimer()
     seconds=0
-    document.getElementById("timer").innerHTML = 0
+    document.getElementById("timer").innerHTML = '0m0s'
     createBoard(sizeX,sizeY,mines)
   }
 
