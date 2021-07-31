@@ -8,12 +8,31 @@ document.addEventListener('DOMContentLoaded', () => {
   var mines = 10
   var minesLeft = mines
   var gameState = 'play'
+  var seconds = 0
+  var timer = null
+  var timerRun = false
+
+  function startTimer(){
+    timer = setInterval(function(){
+      seconds+=1
+      var min = Math.floor(seconds / 60)
+      var sec = Math.floor(seconds - min * 60)
+      document.getElementById("timer").innerHTML = min + "m" + sec + "s"
+    }, 1000)
+    timerRun = true
+  }
+
+  function stopTimer(){
+    clearTimeout(timer)
+    timerRun = false
+  }
 
   function randomInt(min,max) {
     return Math.floor(Math.random() * (max - min + 1)) + min
   }
 
   function createBoard(x,y,mines){
+    stopTimer()
 
     const easy = document.createElement('img')
     easy.setAttribute('src','img/easy.png')
@@ -140,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if(counter==mines){
       gameState='won'
+      stopTimer()
       minesDisplay.textContent = 'You won :)'
     }
   }
@@ -147,6 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function clickField(){
     if(gameState!='play'){
       return
+    }
+    if(timerRun==false){
+      startTimer()
     }
     if(this.getAttribute('src') == 'img/flag.png'){
       return
@@ -168,6 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
       minesDisplay.textContent = 'Game Over'
       this.setAttribute('src','img/mine.png')
       gameState='lost'
+      stopTimer()
     }
   }
 
@@ -175,6 +199,9 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault()
     if(gameState!='play'){
       return
+    }
+    if(timerRun==false){
+      startTimer()
     }
     var type = this.getAttribute('type')
     if((type == 'new' || type == 'mine') && this.getAttribute('src') == 'img/new.png'){
@@ -229,9 +256,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     minesLeft=mines
     gameState='play'
+    stopTimer()
+    seconds=0
+    document.getElementById("timer").innerHTML = 0
     createBoard(sizeX,sizeY,mines)
   }
 
-  createBoard(sizeX,sizeY,mines)
+  createBoard(sizeX,sizeY,mines)  
 })
 
