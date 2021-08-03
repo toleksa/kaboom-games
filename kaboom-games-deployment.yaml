@@ -26,12 +26,30 @@ metadata:
   name: kaboom-games
 spec:
   selector:
-    app: kaboom-games
+    app: kaboom-games-service
   type: LoadBalancer
-  loadBalancerIP: 192.168.0.238
+  #loadBalancerIP: 192.168.0.238
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
       nodePort: 30001
-
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kaboom-games-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: kaboom.kube.ac
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kaboom-games-service
+            port: 
+              number: 80
