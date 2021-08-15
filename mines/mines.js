@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
       minesDisplay.textContent = minesLeft
     }
     if (type == 'mine'){
-      minesDisplay.textContent = 'Game Over'
+      minesDisplay.textContent = 'BOOM!'
       this.setAttribute('src','img/mine.png')
       gameState='lost'
       stopTimer()
