@@ -3,9 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
   //const grid = document.querySelector('.grid')
   const control = document.querySelector('.control')
   const scoreDisplay = document.querySelector('#score')
+  var delay = 0
+  var score = 0
 
   function randomInt(min,max) {
     return Math.floor(Math.random() * (max - min + 1)) + min
+  }
+
+  function startTimer(){
+    timer = setInterval(function(){
+      spawnEnemies()
+    }, delay)
   }
 
   function draw() {
@@ -24,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function gameReset(){
+    score = 0
+    delay = 1000
     draw()
     scoreDisplay.textContent = 1
     startTimer()
