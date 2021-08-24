@@ -3,23 +3,46 @@ document.addEventListener('DOMContentLoaded', () => {
   //const grid = document.querySelector('.grid')
   const control = document.querySelector('.control')
   const scoreDisplay = document.querySelector('#score')
+  var enemies = []
   var iBad  = new Image()
   iBad.src = 'img/bad.png'
   var iGood = new Image()
   iGood.src = 'img/good.png'
   var canvas = document.getElementById('field');
+  canvas.addEventListener('click', click, false);
+  var rect = canvas.getBoundingClientRect();
   var ctx = canvas.getContext('2d');
-  var delay = 0
-  var score = 0
+  var delay
+  var score
+  var timer
 
   function rand(min,max) {
     return Math.floor(Math.random() * (max - min + 1)) + min
   }
 
-  function spawnEnemies(){
-    x=rand(0,380)
-    y=rand(0,380)
-    ctx.drawImage(iBad,x,y,20,20) 
+  function spawnEnemies(num){
+    console.log("spawnEnemies()")
+    clearTimeout(timer)
+    for(i=0;i<num;i++){
+      x=rand(0,380)
+      y=rand(0,380)
+      enemies.push([x,y])
+      ctx.drawImage(iBad,x,y,20,20) 
+    }
+  }
+
+  function click(){
+    console.log('click()')
+    const X = Math.floor(event.clientX - rect.left);
+    const Y = Math.floor(event.clientY - rect.top);
+    console.log([X,Y])
+    for(i=0;i<enemies.length;i++){
+      if(X>=enemies[i][0] && X<=enemies[i][0]+20 && Y>=enemies[i][1] && Y<=enemies[i][1]+20){
+        score=score++
+        scoreDisplay.textContent = score
+        ctx.drawImage(iGood,enemies[i][0],enemies[i][1],20,20) 
+      }
+    }
   }
 
   function startTimer(){
@@ -36,11 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function gameReset(){
+    console.log("gameReset()")
     score = 0
-    delay = 1000
+    delay = 3000
+    enemies = []
     ctx.fillRect(0, 0, 400, 400);
-    scoreDisplay.textContent = 1
-    startTimer()
+    scoreDisplay.textContent = score
+    timer = setInterval(function(){spawnEnemies(1)}, 1000)
   }
 
   gameInit()
