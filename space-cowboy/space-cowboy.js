@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var delay
   var score
   var timer
+  var gameState
 
   function rand(min,max) {
     return Math.floor(Math.random() * (max - min + 1)) + min
@@ -29,26 +30,41 @@ document.addEventListener('DOMContentLoaded', () => {
       enemies.push([x,y])
       ctx.drawImage(iBad,x,y,20,20) 
     }
+    timer = setInterval(endRound, delay)
+  }
+
+  function endRound(){
+    console.log("endRound()")
+    clearTimeout(timer)
+    if(enemies.length>0){
+      scoreDisplay.textContent = 'bang'
+      gameState = 'dead'
+    } else {
+      drawCanvas()
+      var num = Math.ceil(score/5)
+      timer = setInterval(function(){spawnEnemies(num)}, 1000)
+    }
   }
 
   function click(){
-    console.log('click()')
-    const X = Math.floor(event.clientX - rect.left);
-    const Y = Math.floor(event.clientY - rect.top);
-    console.log([X,Y])
-    for(i=0;i<enemies.length;i++){
-      if(X>=enemies[i][0] && X<=enemies[i][0]+20 && Y>=enemies[i][1] && Y<=enemies[i][1]+20){
-        score=score++
-        scoreDisplay.textContent = score
-        ctx.drawImage(iGood,enemies[i][0],enemies[i][1],20,20) 
+    if(gameState==='play'){
+      console.log('click()')
+      const X = Math.floor(event.clientX - rect.left);
+      const Y = Math.floor(event.clientY - rect.top);
+      console.log([X,Y])
+      for(i=enemies.length-1;i>=0;i--){
+        if(X>=enemies[i][0] && X<=enemies[i][0]+20 && Y>=enemies[i][1] && Y<=enemies[i][1]+20){
+          score+=1
+          scoreDisplay.textContent = score
+          ctx.drawImage(iGood,enemies[i][0],enemies[i][1],20,20) 
+          enemies.splice(i,1);
+        }
       }
     }
   }
 
-  function startTimer(){
-    timer = setInterval(function(){
-      spawnEnemies()
-    }, delay)
+  function drawCanvas(){
+    ctx.fillRect(0, 0, 400, 400);
   }
 
   function gameInit(){
@@ -62,8 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("gameReset()")
     score = 0
     delay = 3000
+    gameState = 'play'
     enemies = []
-    ctx.fillRect(0, 0, 400, 400);
+    drawCanvas()
     scoreDisplay.textContent = score
     timer = setInterval(function(){spawnEnemies(1)}, 1000)
   }
