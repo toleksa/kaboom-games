@@ -1,4 +1,8 @@
 // vim: ts=2:sw=2
+//
+// gun https://www.fesliyanstudios.com/royalty-free-sound-effects-download/gun-shooting-300
+// gameover https://mixkit.co/free-sound-effects/game-over/
+//
 document.addEventListener('DOMContentLoaded', () => {
   //const grid = document.querySelector('.grid')
   const control = document.querySelector('.control')
@@ -8,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   iBad.src = 'img/bad.png'
   var iGood = new Image()
   iGood.src = 'img/good.png'
+  //var gun = new Audio('gun4.mp3');
   var canvas = document.getElementById('field');
   canvas.addEventListener('click', click, false);
   var rect = canvas.getBoundingClientRect();
@@ -37,7 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("endRound()")
     clearTimeout(timer)
     if(enemies.length>0){
-      scoreDisplay.textContent = 'bang'
+      var sound = new Audio('gameover.mp3')
+      sound.play()
+      ctx.fillStyle = "blue";
+      ctx.font = "bold 46px Arial";
+      ctx.fillText("GameOver", (canvas.width * 0.2), (canvas.height / 2));
       gameState = 'dead'
     } else {
       drawCanvas()
@@ -49,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function click(){
     if(gameState==='play'){
       console.log('click()')
+      var gun = new Audio('gun4.mp3');
+      gun.play();
       const X = Math.floor(event.clientX - rect.left);
       const Y = Math.floor(event.clientY - rect.top);
       console.log([X,Y])
