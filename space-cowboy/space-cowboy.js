@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const control = document.querySelector('.control')
   const scoreDisplay = document.querySelector('#score')
   var enemies = []
+  vae enemySize = 20
   var iBad  = new Image()
   iBad.src = 'img/bad.png'
   var iGood = new Image()
@@ -30,10 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("spawnEnemies()")
     clearTimeout(timer)
     for(i=0;i<num;i++){
-      x=rand(0,380)
-      y=rand(0,380)
+      x=rand(0,400-enemySize)
+      y=rand(0,400-enemySize)
       enemies.push([x,y])
-      ctx.drawImage(iBad,x,y,20,20) 
+      ctx.drawImage(iBad,x,y,enemySize,enemySize) 
     }
     timer = setInterval(endRound, delay)
   }
@@ -64,10 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const Y = Math.floor(event.clientY - rect.top);
       console.log([X,Y])
       for(i=enemies.length-1;i>=0;i--){
-        if(X>=enemies[i][0] && X<=enemies[i][0]+20 && Y>=enemies[i][1] && Y<=enemies[i][1]+20){
+        if(X>=enemies[i][0] && X<=enemies[i][0]+enemySize && Y>=enemies[i][1] && Y<=enemies[i][1]+enemySize){
           score+=1
           scoreDisplay.textContent = score
-          ctx.drawImage(iGood,enemies[i][0],enemies[i][1],20,20) 
+          ctx.drawImage(iGood,enemies[i][0],enemies[i][1],enemySize,enemySize) 
           enemies.splice(i,1);
         }
       }
