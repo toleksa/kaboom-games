@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gameState = 'dead'
     } else {
       drawCanvas()
-      var num = Math.ceil(score/5)
+      var num = Math.ceil((score+1)/5)
       timer = setInterval(function(){spawnEnemies(num)}, 1000)
     }
   }
