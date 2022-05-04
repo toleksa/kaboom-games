@@ -18,7 +18,17 @@ spec:
       - name: kaboom-games
         image: toleksa/kaboom-games
         ports:
-        - containerPort: 80
+          - name: http
+            containerPort: 80
+            protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: http
 ---
 apiVersion: v1
 kind: Service
