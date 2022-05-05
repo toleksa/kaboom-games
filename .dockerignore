@@ -4,3 +4,4 @@ build.sh
 deploy.sh
 README.md
 kaboom-games-deployment.yaml
+helm/
